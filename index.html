@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spion Spiel</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #2a3d66, #0b1020);
+      color: white;
+      text-align: center;
+    }
+    .hidden { display: none; }
+    .screen { padding: 2em; }
+    .card {
+      background-color: #add8e6;
+      color: black;
+      padding: 2em;
+      margin: 1em;
+      border-radius: 12px;
+      cursor: pointer;
+      display: inline-block;
+      min-width: 150px;
+    }
+    .button {
+      margin-top: 1em;
+      padding: 1em 2em;
+      font-size: 1em;
+      background-color: #1a2c4f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 10px;
+      margin-top: 1em;
+    }
+    label { display: flex; align-items: center; gap: 0.5em; }
+  </style>
+</head>
+<body>
+  <div id="screen1" class="screen">
+    <h1>Spion Spiel</h1>
+    <label>Spieleranzahl: <input id="spieleranzahl" type="number" min="3" max="20" value="4"></label><br>
+    <label>Impostoranzahl: <input id="impostoranzahl" type="number" min="1" value="1"></label><br>
+    <button class="button" onclick="spielerfelderGenerieren()">Spielernamen generieren</button>
+    <div id="spielernamenContainer"></div>
+    <h2>Kategorien</h2>
+    <div id="kategorienContainer" class="category-grid"></div>
+    <button class="button" onclick="spielStarten()">Spielen</button>
+  </div>
+
+  <div id="screen2" class="screen hidden">
+    <h2>Spielkarten</h2>
+    <div id="kartenContainer"></div>
+    <button class="button" onclick="aufloesen()">Auflösen</button>
+  </div>
+
+  <div id="screen3" class="screen hidden">
+    <h2 id="aufloesungText"></h2>
+    <button class="button" onclick="erneutSpielen()">Erneut spielen</button>
+    <button class="button" onclick="zurueckZumMenue()">Menü</button>
+  </div>
+
+  <script>
+    const kategorien = {
+      "Rund um die Welt": [...Array(50).keys()].map(i => `Welt-${i+1}`),
+      "Unterhaltung": [...Array(50).keys()].map(i => `Unterhaltung-${i+1}`),
+      "Alltag": [...Array(50).keys()].map(i => `Alltag-${i+1}`),
+      "Tiere & Natur": [...Array(50).keys()].map(i => `Tier-Natur-${i+1}`),
+      "Sport & Freizeit": [...Array(50).keys()].map(i => `Sport-${i+1}`),
+      "Wissen & Schule": [...Array(50).keys()].map(i => `Wissen-${i+1}`),
+      "Feste & Feiern": [...Array(50).keys()].map(i => `Fest-${i+1}`),
+      "Deutsche Begriffe": [...Array(50).keys()].map(i => `Begriff-${i+1}`),
+      "Stars & Promis": [...Array(50).keys()].map(i => `Promi-${i+1}`),
+      "Technologie & Wissenschaft": [...Array(50).keys()].map(i => `Tech-${i+1}`),
+      "Geographie & Geschichte": [...Array(50).keys()].map(i => `Geo-${i+1}`),
+      "Filme & Serien": [...Array(50).keys()].map(i => `Film-${i+1}`),
+      "Essen & Trinken": [...Array(50).keys()].map(i => `Essen-${i+1}`),
+      "Musik & Kunst": [...Array(50).keys()].map(i => `Kunst-${i+1}`),
+      "Sonstiges": [...Array(50).keys()].map(i => `Sonstiges-${i+1}`)
+    };
+
+    const kategorienContainer = document.getElementById("kategorienContainer");
+    for (const name in kategorien) {
+      const label = document.createElement("label");
+      label.innerHTML = `<input type="checkbox" checked value="${name}"> ${name}`;
+      kategorienContainer.appendChild(label);
+    }
+
+    function spielerfelderGenerieren() {
+      const anzahl = parseInt(document.getElementById("spieleranzahl").value);
+      const container = document.getElementById("spielernamenContainer");
+      container.innerHTML = "";
+      for (let i = 1; i <= anzahl; i++) {
+        container.innerHTML += `<input type="text" placeholder="Name Spieler ${i}" value="Spieler ${i}"><br>`;
+      }
+    }
+
+    let spieler = [];
+    let impostoren = [];
+    let geheimesWort = "";
+
+    function spielStarten() {
+      const inputs = document.querySelectorAll("#spielernamenContainer input");
+      spieler = Array.from(inputs).map(i => i.value);
+      const checked = Array.from(kategorienContainer.querySelectorAll("input:checked"))
+        .map(i => kategorien[i.value])
+        .flat();
+      if (checked.length === 0) return alert("Bitte mindestens eine Kategorie wählen.");
+      const impostorAnz = parseInt(document.getElementById("impostoranzahl").value);
+      if (impostorAnz >= spieler.length) return alert("Impostoren müssen weniger als Spieler sein.");
+
+      geheimesWort = checked[Math.floor(Math.random() * checked.length)];
+      impostoren = [];
+      while (impostoren.length < impostorAnz) {
+        const i = Math.floor(Math.random() * spieler.length);
+        if (!impostoren.includes(i)) impostoren.push(i);
+      }
+
+      const kartenContainer = document.getElementById("kartenContainer");
+      kartenContainer.innerHTML = "";
+      spieler.forEach((name, i) => {
+        const karte = document.createElement("div");
+        karte.className = "card";
+        karte.dataset.index = i;
+        karte.dataset.anzeige = "name";
+        karte.innerText = name;
+        karte.onclick = () => {
+          if (karte.dataset.anzeige === "name") {
+            karte.innerText = impostoren.includes(i) ? "Impostor" : geheimesWort;
+            karte.dataset.anzeige = "wort";
+          } else {
+            karte.innerText = name;
+            karte.dataset.anzeige = "name";
+          }
+        };
+        kartenContainer.appendChild(karte);
+      });
+
+      document.getElementById("screen1").classList.add("hidden");
+      document.getElementById("screen2").classList.remove("hidden");
+    }
+
+    function aufloesen() {
+      document.getElementById("aufloesungText").innerText = "Impostor: " + impostoren.map(i => spieler[i]).join(", ");
+      document.getElementById("screen2").classList.add("hidden");
+      document.getElementById("screen3").classList.remove("hidden");
+    }
+
+    function erneutSpielen() {
+      spielStarten();
+      document.getElementById("screen3").classList.add("hidden");
+      document.getElementById("screen2").classList.remove("hidden");
+    }
+
+    function zurueckZumMenue() {
+      document.getElementById("screen3").classList.add("hidden");
+      document.getElementById("screen1").classList.remove("hidden");
+    }
+
+    spielerfelderGenerieren();
+  </script>
+</body>
+</html>
