@@ -69,21 +69,76 @@
 
   <script>
     const kategorien = {
-      "Rund um die Welt": [...Array(50).keys()].map(i => `Welt-${i+1}`),
-      "Unterhaltung": [...Array(50).keys()].map(i => `Unterhaltung-${i+1}`),
-      "Alltag": [...Array(50).keys()].map(i => `Alltag-${i+1}`),
-      "Tiere & Natur": [...Array(50).keys()].map(i => `Tier-Natur-${i+1}`),
-      "Sport & Freizeit": [...Array(50).keys()].map(i => `Sport-${i+1}`),
-      "Wissen & Schule": [...Array(50).keys()].map(i => `Wissen-${i+1}`),
-      "Feste & Feiern": [...Array(50).keys()].map(i => `Fest-${i+1}`),
-      "Deutsche Begriffe": [...Array(50).keys()].map(i => `Begriff-${i+1}`),
-      "Stars & Promis": [...Array(50).keys()].map(i => `Promi-${i+1}`),
-      "Technologie & Wissenschaft": [...Array(50).keys()].map(i => `Tech-${i+1}`),
-      "Geographie & Geschichte": [...Array(50).keys()].map(i => `Geo-${i+1}`),
-      "Filme & Serien": [...Array(50).keys()].map(i => `Film-${i+1}`),
-      "Essen & Trinken": [...Array(50).keys()].map(i => `Essen-${i+1}`),
-      "Musik & Kunst": [...Array(50).keys()].map(i => `Kunst-${i+1}`),
-      "Sonstiges": [...Array(50).keys()].map(i => `Sonstiges-${i+1}`)
+  "Rund um die Welt": [
+    "Paris", "London", "New York", "Berlin", "Sydney", "Kairo", "Tokio", "Moskau", "Toronto", "Kapstadt",
+    "Peking", "Rio", "Rom", "Bangkok", "Dubai", "Athen", "Oslo", "Wien", "Madrid", "Dublin",
+    "Seoul", "Amsterdam", "Lissabon", "Hanoi", "Prag", "Stockholm", "Mexiko-Stadt", "Istanbul", "Jakarta", "Buenos Aires",
+    "Helsinki", "Singapur", "Budapest", "Taipeh", "Warschau", "Kopenhagen", "Brüssel", "Manila", "Teheran", "Nairobi",
+    "Lagos", "Casablanca", "Chicago", "Los Angeles", "San Francisco", "Barcelona", "München", "Zürich", "Genf", "Kuala Lumpur"
+  ],
+  "Unterhaltung": [
+    "Kino", "Fernsehen", "Buch", "Serie", "Film", "Streaming", "Videospiel", "Comedy", "Drama", "Thriller",
+    "Reality Show", "Talkshow", "Show", "Quiz", "Dokumentation", "Theater", "Musical", "Konzert", "Festival", "Promi",
+    "Regisseur", "Schauspieler", "Drehbuch", "Produzent", "Staffel", "Episode", "Netflix", "YouTube", "Podcast", "Animation",
+    "Märchen", "Cartoon", "Charakter", "Plot", "Twist", "Kamerafahrt", "Effekte", "Stunt", "Live", "Premiere",
+    "Kritik", "Rezension", "Trailer", "Abspann", "Genre", "Blockbuster", "Fan", "Community", "Synchron", "Kult"
+  ],
+  "Alltag": [
+    "Zahnbürste", "Handy", "Schlüssel", "Brille", "Auto", "Bus", "U-Bahn", "Frühstück", "Mittagessen", "Abendessen",
+    "Wecker", "Bett", "Stuhl", "Tisch", "Fenster", "Tür", "Jacke", "Schuhe", "Einkauf", "Geldbörse",
+    "Rechnung", "Staubsauger", "Spülmaschine", "Wäsche", "Wasserkocher", "Kaffeemaschine", "Lampe", "Spiegel", "Kamm", "Seife",
+    "Fernbedienung", "Müll", "Papier", "Kugelschreiber", "Tasche", "Rucksack", "Buch", "Zeitung", "Zug", "Fahrrad",
+    "Parkplatz", "Ampel", "Telefon", "Computer", "Monitor", "Ladekabel", "Steckdose", "Schalter", "Handtuch", "Waschbecken"
+  ],
+  "Tiere & Natur": [
+    "Hund", "Katze", "Pferd", "Kuh", "Schaf", "Huhn", "Vogel", "Fisch", "Löwe", "Tiger",
+    "Elefant", "Affe", "Giraffe", "Bär", "Wolf", "Fuchs", "Hirsch", "Reh", "Krokodil", "Schlange",
+    "Frosch", "Eule", "Maus", "Käfer", "Biene", "Schmetterling", "Wespe", "Marienkäfer", "Ameise", "Delfin",
+    "Wal", "Hai", "Qualle", "Krabbe", "Seestern", "Koralle", "Baum", "Blume", "Gras", "Busch",
+    "Blatt", "Ast", "Wald", "See", "Fluss", "Meer", "Berg", "Hügel", "Wüste", "Insel"
+  ],
+  "Sport & Freizeit": [
+    "Fußball", "Basketball", "Tennis", "Handball", "Volleyball", "Schwimmen", "Radfahren", "Laufen", "Boxen", "Turnen",
+    "Skifahren", "Snowboard", "Surfen", "Klettern", "Yoga", "Pilates", "Golf", "Bowling", "Reiten", "Schach",
+    "Dart", "Billard", "Angeln", "Wandern", "Joggen", "Fitnessstudio", "Workout", "Tanzen", "Zumba", "Parkour",
+    "Eishockey", "Baseball", "Cricket", "Rugby", "Skaten", "Rollerblading", "Bouldern", "Slackline", "Motorsport", "Formel 1",
+    "Tischtennis", "Badminton", "Segeln", "Tauchen", "Kanu", "Kegeln", "Paintball", "Luftgewehr", "Bogenschießen", "BMX"
+  ],
+  "Wissen & Schule": [
+    "Mathematik", "Deutsch", "Englisch", "Biologie", "Chemie", "Physik", "Geschichte", "Erdkunde", "Musik", "Kunst",
+    "Sport", "Religion", "Ethik", "Informatik", "Politik", "Sozialkunde", "Heft", "Stift", "Radiergummi", "Lineal",
+    "Tafel", "Kreide", "Lehrer", "Schüler", "Klasse", "Schulhof", "Hausaufgabe", "Test", "Klassenarbeit", "Zeugnis",
+    "Pausenbrot", "Ranzen", "Schulbus", "Schultüte", "Noten", "Fach", "Stunde", "Gong", "Stundenplan", "Ferien",
+    "Bibliothek", "Bücher", "Arbeitsblatt", "Abfrage", "Mensa", "Computerraum", "Beamer", "Projekt", "Lernen", "Abschluss"
+  ],
+  "Feste & Feiern": [
+    "Geburtstag", "Weihnachten", "Silvester", "Ostern", "Halloween", "Karneval", "Hochzeit", "Jubiläum", "Taufe", "Konfirmation",
+    "Nikolaus", "Erntedank", "Valentinstag", "Neujahr", "Muttertag", "Vatertag", "Laternenfest", "Abiball", "Weihnachtsmarkt", "Feuerwerk",
+    "Torte", "Geschenk", "Kerze", "Ballon", "Girlande", "Kostüm", "Verkleidung", "Süßigkeiten", "Musik", "Tanz",
+    "Getränke", "Buffet", "Gäste", "Einladung", "Party", "DJ", "Lichtshow", "Bühne", "Feier", "Zelt",
+    "Wimpel", "Kuchen", "Luftschlangen", "Hut", "Kamera", "Schnitzeljagd", "Reden", "Toast", "Tischdeko", "Fotos"
+  ],
+  "Deutsche Begriffe": [
+    "Gemütlichkeit", "Fernweh", "Heimat", "Schadenfreude", "Zeitgeist", "Weltschmerz", "Kummerspeck", "Fingerspitzengefühl", "Treppenwitz", "Torschlusspanik",
+    "Zweisamkeit", "Feierabend", "Sturmfrei", "Fremdschämen", "Ohrwurm", "Schnapsidee", "Sitzfleisch", "Innerer Schweinehund", "Handschuh", "Schmetterling",
+    "Donnerwetter", "Schublade", "Kopfkino", "Morgenmuffel", "Zugzwang", "Kuddelmuddel", "Mahlzeit", "Kindergarten", "Backpfeifengesicht", "Brückentag",
+    "Besenrein", "Sonderangebot", "Abendbrot", "Querdenker", "Flitzpiepe", "Kaffeeklatsch", "Schlafmütze", "Schlafanzug", "Gänsehaut", "Hausarzt",
+    "Staubsauger", "Waschmaschine", "Geschirrspüler", "Autobahn", "Ampel", "Kopfhörer", "Handyvertrag", "Fensterbank", "Teelicht", "Fußballfan"
+  ],
+  "Stars & Promis": [
+    "Taylor Swift", "Elon Musk", "Angela Merkel", "Cristiano Ronaldo", "Lionel Messi", "Billie Eilish", "Barack Obama", "Donald Trump", "Selena Gomez", "Ed Sheeran",
+    "BTS", "Ariana Grande", "The Rock", "Leonardo DiCaprio", "Emma Watson", "Justin Bieber", "Kim Kardashian", "Kanye West", "Tom Cruise", "Lady Gaga",
+    "Shakira", "Rihanna", "Beyoncé", "Zendaya", "Keanu Reeves", "Johnny Depp", "Will Smith", "Brad Pitt", "Megan Fox", "Jennifer Lopez",
+    "Heidi Klum", "Mark Zuckerberg", "Jeff Bezos", "PewDiePie", "MrBeast", "Kai Pflaume", "Rezo", "Paluten", "Gronkh", "MontanaBlack",
+    "Shirin David", "Apache 207", "Capital Bra", "Helene Fischer", "Andreas Gabalier", "Florian Silbereisen", "Lena Meyer-Landrut", "Sido", "Bushido", "Joko Winterscheidt"
+  ],
+  "Technologie & Wissenschaft": [
+    "Computer", "Smartphone", "Internet", "KI", "Roboter", "Drohne", "GPS", "Satellit", "3D-Drucker", "Laser",
+    "Nanotechnologie", "Quantenphysik", "Algorithmus", "Datenbank", "Cloud", "WLAN", "Bluetooth", "Software", "Hardware", "Sensor",
+    "Proton", "Elektron", "Atom", "Molekül", "Zelle", "DNA", "Genetik", "Klonen", "Big Data", "Maschinenlernen",
+    "Forschung", "Experiment", "Labor", "Teleskop", "Mikroskop", "Virenschutz", "Netzwerk", "Kryptografie", "Simulation", "Modell",
+    "Energie", "Solarzelle", "Windkraft", "Strom", "Magnet", "Akku", "Batterie", "Ladegerät", "Update", "Programmierer"
+  ]
     };
 
     const kategorienContainer = document.getElementById("kategorienContainer");
