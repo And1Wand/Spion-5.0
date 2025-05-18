@@ -58,6 +58,7 @@
   <div id="screen2" class="screen hidden">
     <h2>Spielkarten</h2>
     <div id="kartenContainer"></div>
+    <p id="startspieler" style="color: white; font-size: 1.2em; margin-top: 20px; text-align: center;"></p>
     <button class="button" onclick="aufloesen()">Auflösen</button>
   </div>
 
@@ -197,6 +198,8 @@
         };
         kartenContainer.appendChild(karte);
       });
+      const startspieler = spieler[Math.floor(Math.random() * spieler.length)];
+document.getElementById("startspieler").textContent = `${startspieler} fängt an.`;
 
       document.getElementById("screen1").classList.add("hidden");
       document.getElementById("screen2").classList.remove("hidden");
